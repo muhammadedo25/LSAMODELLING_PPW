@@ -1,0 +1,1690 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Topik Medelling dengan Jupyter Notebook dengan menggunakan metode LSA (Latent Semantic Analysis) pada jurnal PTA Trunojoyo Ekonomi - Manajemen &#8212; LSA Modelling Dengan Crawling Data PTA Ekonomi-Manajemen</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="K-Means Cluster" href="kmeans.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">LSA Modelling Dengan Crawling Data PTA Ekonomi-Manajemen</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="crawling.html">
+   Crawling Data From Web PTA.Trunojoyo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kmeans.html">
+   K-Means Cluster
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Topik Medelling dengan Jupyter Notebook dengan menggunakan metode LSA (Latent Semantic Analysis) pada jurnal PTA Trunojoyo Ekonomi - Manajemen
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/ModelingLSA.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FModelingLSA.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ModelingLSA.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-processing">
+   1. Pre-Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#li-pengecekan-missing-value">
+     <li class="nav-item toc-entry">
+      Pengecekan Missing Value
+     </li>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#li-melakukan-stopword">
+     <li class="nav-item toc-entry">
+      Melakukan Stopword
+     </li>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#li-term-frequency-inverse-document-frequency-tf-idf">
+     <li class="nav-item toc-entry">
+      Term Frequency — Inverse Document Frequency (TF-IDF)
+     </li>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#penerapan-lsa-latent-semantic-analysis">
+   2. Penerapan LSA (Latent Semantic Analysis)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Topik Medelling dengan Jupyter Notebook dengan menggunakan metode LSA (Latent Semantic Analysis) pada jurnal PTA Trunojoyo Ekonomi - Manajemen</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-processing">
+   1. Pre-Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#li-pengecekan-missing-value">
+     <li class="nav-item toc-entry">
+      Pengecekan Missing Value
+     </li>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#li-melakukan-stopword">
+     <li class="nav-item toc-entry">
+      Melakukan Stopword
+     </li>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#li-term-frequency-inverse-document-frequency-tf-idf">
+     <li class="nav-item toc-entry">
+      Term Frequency — Inverse Document Frequency (TF-IDF)
+     </li>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#penerapan-lsa-latent-semantic-analysis">
+   2. Penerapan LSA (Latent Semantic Analysis)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="topik-medelling-dengan-jupyter-notebook-dengan-menggunakan-metode-lsa-latent-semantic-analysis-pada-jurnal-pta-trunojoyo-ekonomi-manajemen">
+<h1>Topik Medelling dengan Jupyter Notebook dengan menggunakan metode LSA (Latent Semantic Analysis) pada jurnal PTA Trunojoyo Ekonomi - Manajemen<a class="headerlink" href="#topik-medelling-dengan-jupyter-notebook-dengan-menggunakan-metode-lsa-latent-semantic-analysis-pada-jurnal-pta-trunojoyo-ekonomi-manajemen" title="Permalink to this headline">#</a></h1>
+<p>Langkah-langkah yang dilakukan adalah sebagai berikut : <br>
+1 Pre-Processing
+<ul>
+<li> pengecekan missing value
+<li> Melakukan Stopword
+<li> Melakukan Proses TF-IDF
+</ul>
+2 Penerapan model LSA</p>
+<section id="pre-processing">
+<h2>1. Pre-Processing<a class="headerlink" href="#pre-processing" title="Permalink to this headline">#</a></h2>
+<p>Data preprocessing adalah proses yang mengubah data mentah ke dalam bentuk yang lebih mudah dipahami. Proses ini dilakukan karena data mentah sering kali tidak memiliki format yang teratur. Proses ini dilakukan untuk mempersiapkan data mentah menjadi data siap pakai kedalam format yang berguna dan efisien dengan metode/ model yang akan digunakan. Dengan begitu, data tersebut dapat dilakukan untuk proses selanjutnya yaitu analisis data.</p>
+<section id="li-pengecekan-missing-value">
+<h3><li> Pengecekan Missing Value<a class="headerlink" href="#li-pengecekan-missing-value" title="Permalink to this headline">#</a></h3>
+<p>Missing Value merupakan hilangnya beberapa data yang di peroleh. Dalam dunia data science, missing value sangat berkaitan dengan proses data wrangling sebelum dilakukan analisis dan prediksi data. Data wrangling merupakan kegiatan penyeragaman data atau pembersihan data (cleaning data) dari data kotor (mentah) menjadi data yang nantinya siap digunakan untuk analisis. Data kotor (mentah) yang dimaksud adalah data yang terindikasi masih terdapat ketidakseragaman format, muncul missing values pada data, dan masih juga ditemukan adanya tambahan sufiks, prefiks dan lain-lain. <br><br>
+Untuk proses pengidentifikasian missing value bisa dilihat dari proses dibawah ini</p>
+<blockquote>
+<div><p>Import Modules</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>import dan baca dataset</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Judul</th>
+      <th>Penulis</th>
+      <th>Dosbing_1</th>
+      <th>Dosbing_2</th>
+      <th>Abstrak_indo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PELAPORAN BIAYA KUALITAS UNTUK MEMINIMALKAN TE...</td>
+      <td>M. Boy Singgih Gitayuda</td>
+      <td>Drs. Ec. Makhmud Zulkifli, M.Si</td>
+      <td>rasetyo Nugroho,. S.Pi., MM</td>
+      <td>ABSTRAK\r\n\r\nPenelitian ini mengungkapkan be...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PENGARUH RETAILING MIX (BAURAN ECERAN) TERHADA...</td>
+      <td>Ali Usman</td>
+      <td>Dr. Ir. Nurita Andriani, MM</td>
+      <td>adi Purnomo, SE., MM</td>
+      <td>Bauran eceran merupakan salah satu langkah pem...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PENGARUH CELEBRITY ENDORSER IWAN FALS TERHADAP...</td>
+      <td>Tayyi Matun</td>
+      <td>Bambang Setiyo Pambudi</td>
+      <td>ustina Chrismardani</td>
+      <td>Tujuan penelitian ini adalah mengetahui pengar...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pengaruh Harga dan Kualitas Pelayanan terhadap...</td>
+      <td>ALI RAHBINI</td>
+      <td>PRIBANUS WANTARA</td>
+      <td>IRMA KURRIWATI</td>
+      <td>Ali Rahbini, Pengaruh Harga dan Kualitas Pelay...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Pengaruh Retailing Mix terhadap Keputusan Pemb...</td>
+      <td>Fitriyah</td>
+      <td>Dr. H. Pribanus Wantara, Drs., MM</td>
+      <td>ustina Chrismardani, S.Si., MM</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(50, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Script diatas untuk melakukan pengecekan jumlah tabel (row, kolom) dari dataset</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Judul           0
+Penulis         0
+Dosbing_1       0
+Dosbing_2       0
+Abstrak_indo    0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>kode diatas untuk melakukan pengecekan missing value pada masing-masing fiturnya</p>
+</div></blockquote>
+<p>Dari proses pengecekan diatas, dapat diketahui bahwa dataset yang dimiliki terdapat 10 jumlah dokumen dengan 5 fitur <br>
+Dan tidak ada data yang hilang didalam dataset ini, sehingga tidak perlu dilakukan pemrosesan metode apapun untuk menangani missing value</p>
+</section>
+<section id="li-melakukan-stopword">
+<h3><li> Melakukan Stopword<a class="headerlink" href="#li-melakukan-stopword" title="Permalink to this headline">#</a></h3>
+<p>Dalam tahap ini, dataset yang sudah siap dipakai, yakni data pada fitur “Abstrak_indo”. akan di hapus kata-kata penghubungnya menggunakan bantuan library “nltk”</p>
+<blockquote>
+<div><p>Import Library</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;popular&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading collection &#39;popular&#39;
+[nltk_data]    | 
+[nltk_data]    | Downloading package cmudict to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package cmudict is already up-to-date!
+[nltk_data]    | Downloading package gazetteers to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package gazetteers is already up-to-date!
+[nltk_data]    | Downloading package genesis to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package genesis is already up-to-date!
+[nltk_data]    | Downloading package gutenberg to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package gutenberg is already up-to-date!
+[nltk_data]    | Downloading package inaugural to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package inaugural is already up-to-date!
+[nltk_data]    | Downloading package movie_reviews to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package movie_reviews is already up-to-date!
+[nltk_data]    | Downloading package names to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package names is already up-to-date!
+[nltk_data]    | Downloading package shakespeare to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package shakespeare is already up-to-date!
+[nltk_data]    | Downloading package stopwords to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package stopwords is already up-to-date!
+[nltk_data]    | Downloading package treebank to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Package treebank is already up-to-date!
+[nltk_data]    | Downloading package twitter_samples to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package twitter_samples is already up-to-date!
+[nltk_data]    | Downloading package omw to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package omw is already up-to-date!
+[nltk_data]    | Downloading package omw-1.4 to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package omw-1.4 is already up-to-date!
+[nltk_data]    | Downloading package wordnet to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Package wordnet is already up-to-date!
+[nltk_data]    | Downloading package wordnet2021 to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package wordnet2021 is already up-to-date!
+[nltk_data]    | Downloading package wordnet31 to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package wordnet31 is already up-to-date!
+[nltk_data]    | Downloading package wordnet_ic to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package wordnet_ic is already up-to-date!
+[nltk_data]    | Downloading package words to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package words is already up-to-date!
+[nltk_data]    | Downloading package maxent_ne_chunker to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package maxent_ne_chunker is already up-to-date!
+[nltk_data]    | Downloading package punkt to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package punkt is already up-to-date!
+[nltk_data]    | Downloading package snowball_data to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Package snowball_data is already up-to-date!
+[nltk_data]    | Downloading package averaged_perceptron_tagger to
+[nltk_data]    |     C:\Users\lenovo\AppData\Roaming\nltk_data...
+[nltk_data]    |   Package averaged_perceptron_tagger is already up-
+[nltk_data]    |       to-date!
+[nltk_data]    | 
+[nltk_data]  Done downloading collection popular
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contents</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Abstrak_indo&#39;</span><span class="p">]</span>
+<span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Script diatas digunakan untuk mengambil data dari fitur “Abstrak_indo”, dan lakukan pemrosesan alphabet huruf kecil dari datanya agar sesuai dengan library stopword dari “nltk”</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stopping_word</span><span class="p">(</span><span class="n">contents</span><span class="p">):</span>    
+    <span class="n">data_kata</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+    <span class="n">stop_words2</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">)</span>
+    <span class="n">stop_words</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">stop_words2</span><span class="p">)</span>
+    <span class="n">jmlData</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="n">shape</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">jmlData</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">word_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c1"># print(word_tokens)</span>
+            
+        <span class="n">word_tokens_no_stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word_tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+        <span class="n">special_char</span> <span class="o">=</span> <span class="s2">&quot;+=`@_!#$%^&amp;*()&lt;&gt;?/\|}{~:;.[],1234567890‘’&#39;&quot;</span> <span class="o">+</span> <span class="s1">&#39;&quot;“”●&#39;</span>
+        <span class="n">out_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">string</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">special_char</span><span class="p">)</span> <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">word_tokens_no_stopwords</span><span class="p">]</span>
+        <span class="c1"># print(&#39;List after removal of special characters:&#39;, out_list)</span>
+
+        <span class="k">while</span> <span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="n">out_list</span><span class="p">:</span>
+            <span class="n">out_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">data_kata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data_kata</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Script diatas digunakan untuk pemrosesan Stopword</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stop_kata</span> <span class="o">=</span> <span class="n">stopping_word</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;stop_kata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stop_kata</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Penerapan stopword pada data</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;stop_kata&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     [abstrak, penelitian, rumusan, pelaporan, biay...
+1     [bauran, eceran, salah, langkah, pemasaran, ke...
+2     [tujuan, penelitian, pengaruh, celebrity, endo...
+3     [ali, rahbini, pengaruh, harga, kualitas, pela...
+4     [tujuan, penelitian, pengaruh, variabel, retai...
+5     [abstrak, tujuan, penelitian, pengaruh, variab...
+6     [abstrak, penelitian, bertujuan, mengukur, efe...
+7     [abstrak, tujuan, penelitian, mendeskripsikan,...
+8     [tujuan, penelitian, mengidentifikasi, variabe...
+9     [objek, penelitian, pembelian, produk, xl, kec...
+10    [pln, badan, usaha, milik, negara, bergerak, b...
+11    [intention, research, know, influence, locatio...
+12    [kenaikan, harga, menyebabkan, permintaan, pem...
+13    [pengaruh, bundling, strategy, keputusan, pemb...
+14    [tujuan, penelitian, tingkat, kebangkrutan, pe...
+15    [abstrak, tujuan, penelitian, pengaruh, variab...
+16    [tujuan, penlitian, variabel, iklan, berdasark...
+17    [abstrak, tujuan, penelitian, harga, kualitas,...
+18    [abstrak, tujuan, penelitian, menganalisis, at...
+19    [ulfiyatun, mutohharoh, analisis, faktor-fakto...
+20    [pendekatan, penelitian, penelitian, pendekata...
+21    [tujuan, penelitian, pengaruh, variabel, relat...
+22    [diana, agustini, dewi, analisis, kinerja, keu...
+23    [tujuan, penelitian, pengaruh, variabel, self,...
+24    [muhammad, sholeh, pengaruh, iklan, televisi, ...
+25    [abstrak, tujuan, penelitian, variabel, kompen...
+26    [abstrak, penelitian, bertujuan, meneliti, pen...
+27    [abtrak, uswatun, khasanah, pengaruh, etos, ke...
+28    [munculnya, asumsi, lahirnya, budaya, mengemis...
+29    [abstrak, penelitian, bertujuan, pengaruh, fak...
+30    [keputusan, investasi, berhubungan, keuntungan...
+31    [penelitian, bertujuan, pengaruh, rekrutmen, p...
+32    [abstrak, hening, ary, putra, pengaruh, iklan,...
+33    [habibah, pengaruh, ekuitas, merek, keputusan,...
+34    [atribut, produk, pandangan, gambaran, produk,...
+35    [tujuan, penelitian, pengaruh, variabel, perse...
+36    [kusniyah, analisis, volume, perdagangan, saha...
+37    [muzanni, peranan, manajemen, piutang, tertaha...
+38    [abstrak, ike, miranti, pengaruh, strategi, pr...
+39    [anissa, novianti, pengaruh, atribut, produk, ...
+40    [abstrak, tujuan, penelitian, variabel, harga,...
+41    [abstrak, tujuan, penelitian, pengaruh, elemen...
+42    [abstrak, harga, merek, salah, langkah, diperh...
+43    [menjalani, pekerjaan, mencampur, adukkan, per...
+44    [abstrak, penelitian, bertujuan, pengaruh, uns...
+45    [tujuan, penelitian, marketing, mix, produk, h...
+46    [abstrak, tujuan, penelitian, mengidentifikasi...
+47    [abstrak, tujuan, penelitian, pengaruh, perila...
+48    [abstrak, tujuan, penelitian, pengaruh, bauran...
+49    [abstrak, tujuan, penelitian, pengaruh, pesan,...
+Name: stop_kata, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>hasil stopword berupa list tiap dokumen</p>
+</div></blockquote>
+</section>
+<section id="li-term-frequency-inverse-document-frequency-tf-idf">
+<h3><li> Term Frequency — Inverse Document Frequency (TF-IDF)<a class="headerlink" href="#li-term-frequency-inverse-document-frequency-tf-idf" title="Permalink to this headline">#</a></h3>
+<p>TF-IDF adalah suatu metode algoritma untuk menghitung bobot setiap kata di setiap dokumen dalam korpus. Metode ini juga terkenal efisien, mudah dan memiliki hasil yang akurat.</p>
+<p>Inti utama dari algoritma ini adalah melakukan perhitungan nilai TF dan nilai IDF dari sebuah setiap kata kunci terhadap masing-masing dokumen. Nilai TF dihitung dengan rumus TF = jumlah frekuensi kata terpilih / jumlah kata dan nilai IDF dihitung dengan rumus IDF = log(jumlah dokumen / jumlah frekuensi kata terpilih). Selanjutnya kedua hasil ini akan dikalikan sehingga menghasilkan TF-IDF. <br><br> TF-IDF dihitung dengan menggunakan persamaan seperti berikut.</p>
+<div class="math notranslate nohighlight">
+\[
+W_{i, j}=\frac{n_{i, j}}{\sum_{j=1}^{p} n_{j, i}} \log _{2} \frac{D}{d_{j}}
+\]</div>
+<p>Keterangan:</p>
+<p><span class="math notranslate nohighlight">\(
+{W_{i, j}}\quad\quad\&gt;: \text { pembobotan tf-idf untuk term ke-j pada dokumen ke-i } \\
+{n_{i, j}}\quad\quad\&gt;\&gt;: \text { jumlah kemunculan term ke-j pada dokumen ke-i }\\
+{p} \quad\quad\quad\&gt;\&gt;: \text { banyaknya term yang terbentuk }\\
+{\sum_{j=1}^{p} n_{j, i}}: \text { jumlah kemunculan seluruh term pada dokumen ke-i }\\
+{d_{j}} \quad\quad\quad: \text { banyaknya dokumen yang mengandung term ke-j }\\
+\)</span></p>
+<blockquote>
+<div><p>import library</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfTransformer</span><span class="p">,</span> <span class="n">CountVectorizer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Mempersiapkan data yang sudah di stopword agar sesuai dengan format inputan dari salah satu library scikit-learn, yakni TF-IDF</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;stop_kata_join&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">l</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;stop_kata&#39;</span><span class="p">]]</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;stop_kata_join&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     abstrak penelitian rumusan pelaporan biaya kua...
+1     bauran eceran salah langkah pemasaran keberhas...
+2     tujuan penelitian pengaruh celebrity endorser ...
+3     ali rahbini pengaruh harga kualitas pelayanan ...
+4     tujuan penelitian pengaruh variabel retailing ...
+5     abstrak tujuan penelitian pengaruh variabel cu...
+6     abstrak penelitian bertujuan mengukur efektivi...
+7     abstrak tujuan penelitian mendeskripsikan inov...
+8     tujuan penelitian mengidentifikasi variabel-va...
+9     objek penelitian pembelian produk xl kecamatan...
+10    pln badan usaha milik negara bergerak bidang p...
+11    intention research know influence location eff...
+12    kenaikan harga menyebabkan permintaan pembelia...
+13    pengaruh bundling strategy keputusan pembelian...
+14    tujuan penelitian tingkat kebangkrutan perusah...
+15    abstrak tujuan penelitian pengaruh variabel ku...
+16    tujuan penlitian variabel iklan berdasarkan ko...
+17    abstrak tujuan penelitian harga kualitas produ...
+18    abstrak tujuan penelitian menganalisis atribut...
+19    ulfiyatun mutohharoh analisis faktor-faktor me...
+20    pendekatan penelitian penelitian pendekatan ku...
+21    tujuan penelitian pengaruh variabel relationsh...
+22    diana agustini dewi analisis kinerja keuangan ...
+23    tujuan penelitian pengaruh variabel self effic...
+24    muhammad sholeh pengaruh iklan televisi keputu...
+25    abstrak tujuan penelitian variabel kompensasi ...
+26    abstrak penelitian bertujuan meneliti pendidik...
+27    abtrak uswatun khasanah pengaruh etos kerja pr...
+28    munculnya asumsi lahirnya budaya mengemis dise...
+29    abstrak penelitian bertujuan pengaruh faktor-f...
+30    keputusan investasi berhubungan keuntungan ris...
+31    penelitian bertujuan pengaruh rekrutmen pengem...
+32    abstrak hening ary putra pengaruh iklan online...
+33    habibah pengaruh ekuitas merek keputusan pembe...
+34    atribut produk pandangan gambaran produk deale...
+35    tujuan penelitian pengaruh variabel persepsi n...
+36    kusniyah analisis volume perdagangan saham ret...
+37    muzanni peranan manajemen piutang tertahadap r...
+38    abstrak ike miranti pengaruh strategi promosi ...
+39    anissa novianti pengaruh atribut produk keputu...
+40    abstrak tujuan penelitian variabel harga kuali...
+41    abstrak tujuan penelitian pengaruh elemen-elem...
+42    abstrak harga merek salah langkah diperhatikan...
+43    menjalani pekerjaan mencampur adukkan permasal...
+44    abstrak penelitian bertujuan pengaruh unsur - ...
+45    tujuan penelitian marketing mix produk harga p...
+46    abstrak tujuan penelitian mengidentifikasi var...
+47    abstrak tujuan penelitian pengaruh perilaku ko...
+48    abstrak tujuan penelitian pengaruh bauran pema...
+49    abstrak tujuan penelitian pengaruh pesan iklan...
+Name: stop_kata_join, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Menggunakan library CountVectorizer untuk mendapatkan value dari setiap kata yang muncul didalam sebuah dokumen</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">bag</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;stop_kata_join&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bag</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bag</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (0, 0)	1
+  (0, 699)	4
+  (0, 858)	1
+  (0, 681)	5
+  (0, 109)	6
+  (0, 465)	6
+  (0, 546)	1
+  (0, 851)	4
+  (0, 783)	5
+  (0, 128)	5
+  (0, 146)	2
+  (0, 375)	2
+  (0, 345)	2
+  (0, 871)	2
+  (0, 709)	2
+  (0, 987)	2
+  (0, 789)	5
+  (0, 105)	1
+  (0, 758)	3
+  (0, 598)	1
+  (0, 163)	1
+  (0, 567)	1
+  (0, 262)	1
+  (0, 555)	1
+  (0, 1024)	1
+  :	:
+  (49, 49)	1
+  (49, 435)	1
+  (49, 32)	2
+  (49, 827)	1
+  (49, 497)	1
+  (49, 90)	1
+  (49, 469)	1
+  (49, 602)	6
+  (49, 219)	2
+  (49, 322)	5
+  (49, 759)	18
+  (49, 941)	5
+  (49, 106)	1
+  (49, 931)	3
+  (49, 961)	5
+  (49, 350)	4
+  (49, 277)	3
+  (49, 936)	3
+  (49, 669)	5
+  (49, 356)	5
+  (49, 991)	5
+  (49, 36)	5
+  (49, 890)	5
+  (49, 625)	5
+  (49, 520)	5 
+
+(50, 1040)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Variabel “bag” berisi total kemunculan kata dalam corpus yang muncul dalam setiap dokumen.  Jadi dari variabel ini dapat diketahui total kata yang diperoleh dari 10 dokumen adalah sebanyak 339 kata, yang dimana setiap dokumen akan menghitung term frequency-nya masing-masing dari daftar kata didalam corpus 10 data ini.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;abstrak&#39;: 0, &#39;penelitian&#39;: 699, &#39;rumusan&#39;: 858, &#39;pelaporan&#39;: 681, &#39;biaya&#39;: 109, &#39;kualitas&#39;: 465, &#39;meminimalkan&#39;: 546, &#39;risiko&#39;: 851, &#39;produk&#39;: 783, &#39;cacat&#39;: 128, &#39;cv&#39;: 146, &#39;kapuas&#39;: 375, &#39;inti&#39;: 345, &#39;sarana&#39;: 871, &#39;pengaruh&#39;: 709, &#39;tingkat&#39;: 987, &#39;profitabilitas&#39;: 789, &#39;bertujuan&#39;: 105, &#39;perusahaan&#39;: 758, &#39;metode&#39;: 598, &#39;deskriptif&#39;: 163, &#39;menggambarkan&#39;: 567, &#39;fenomena&#39;: 262, &#39;mendeskripsikan&#39;: 555, &#39;variabel&#39;: 1024, &#39;berasal&#39;: 81, &#39;data&#39;: 152, &#39;hasil&#39;: 305, &#39;periodik&#39;: 744, &#39;terperinci&#39;: 978, &#39;berpengaruh&#39;: 99, &#39;peningkatan&#39;: 721, &#39;mengurangi&#39;: 579, &#39;berkurang&#39;: 94, &#39;penjualan&#39;: 722, &#39;langsung&#39;: 483, &#39;meningkatnya&#39;: 583, &#39;kunci&#39;: 471, &#39;bauran&#39;: 70, &#39;eceran&#39;: 229, &#39;salah&#39;: 863, &#39;langkah&#39;: 482, &#39;pemasaran&#39;: 685, &#39;keberhasilan&#39;: 387, &#39;bergerak&#39;: 91, &#39;bidang&#39;: 110, &#39;produksi&#39;: 784, &#39;barang&#39;: 68, &#39;jasaindah&#39;: 360, &#39;swalayan&#39;: 949, &#39;bangkalan&#39;: 60, &#39;bisnis&#39;: 114, &#39;jual&#39;: 367, &#39;beli&#39;: 78, &#39;memperhatikan&#39;: 548, &#39;perilaku&#39;: 741, &#39;konsumen&#39;: 452, &#39;mengambil&#39;: 563, &#39;keputusan&#39;: 412, &#39;teori&#39;: 964, &#39;berman&#39;: 97, &#39;evans&#39;: 252, &#39;foster&#39;: 278, &#39;lokasi&#39;: 501, &#39;pelayanan&#39;: 683, &#39;harga&#39;: 303, &#39;suasana&#39;: 933, &#39;promosi&#39;: 791, &#39;tujuan&#39;: 1000, &#39;simultan&#39;: 899, &#39;pembelian&#39;: 687, &#39;studi&#39;: 932, &#39;indah&#39;: 324, &#39;pendekatan&#39;: 694, &#39;kuantitatif&#39;: 467, &#39;teknik&#39;: 958, &#39;pengambilan&#39;: 708, &#39;sampel&#39;: 865, &#39;purposive&#39;: 806, &#39;sampling&#39;: 868, &#39;respondenteknik&#39;: 838, &#39;pengumpulan&#39;: 720, &#39;wawancara&#39;: 1033, &#39;kepustakaan&#39;: 411, &#39;kuesioner&#39;: 470, &#39;skala&#39;: 905, &#39;likert&#39;: 493, &#39;mengukur&#39;: 577, &#39;respondenuntuk&#39;: 840, &#39;menguji&#39;: 576, &#39;instrumen&#39;: 338, &#39;uji&#39;: 1008, &#39;validitas&#39;: 1023, &#39;reliabilitas&#39;: 830, &#39;asumsi&#39;: 49, &#39;klasiksedangkan&#39;: 435, &#39;analisis&#39;: 32, &#39;regresi&#39;: 827, &#39;linier&#39;: 497, &#39;berganda&#39;: 90, &#39;namun&#39;: 629, &#39;parsial&#39;: 668, &#39;bangakalan&#39;: 59, &#39;pemebelian&#39;: 688, &#39;kuci&#39;: 469, &#39;toko&#39;: 990, &#39;karyawan&#39;: 379, &#39;celebrity&#39;: 131, &#39;endorser&#39;: 243, &#39;iwan&#39;: 352, &#39;fals&#39;: 260, &#39;minat&#39;: 602, &#39;top&#39;: 993, &#39;coffee&#39;: 137, &#39;masyarakat&#39;: 528, &#39;sumur&#39;: 938, &#39;kembang&#39;: 404, &#39;kelurahan&#39;: 401, &#39;pejagan&#39;: 676, &#39;kecamatan&#39;: 391, &#39;kabupaten&#39;: 371, &#39;survey&#39;: 945, &#39;populasi&#39;: 766, &#39;menngunakan&#39;: 586, &#39;aksidental&#39;: 18, &#39;responden&#39;: 837, &#39;desember&#39;: 161, &#39;lapang&#39;: 484, &#39;membagikan&#39;: 538, &#39;riset&#39;: 850, &#39;perpustakaan&#39;: 750, &#39;pengolahan&#39;: 717, &#39;bantuan&#39;: 66, &#39;erangkat&#39;: 247, &#39;lunak&#39;: 505, &#39;spss&#39;: 918, &#39;versi&#39;: 1029, &#39;windows&#39;: 1036, &#39;bebas&#39;: 72, &#39;trustworthiness&#39;: 997, &#39;expertise&#39;: 256, &#39;attractiveness&#39;: 54, &#39;respect&#39;: 836, &#39;similarity&#39;: 896, &#39;mempengaruhi&#39;: 547, &#39;terikat&#39;: 973, &#39;minet&#39;: 604, &#39;membuktikan&#39;: 542, &#39;signifikan&#39;: 893, &#39;disimpulkan&#39;: 201, &#39;miant&#39;: 599, &#39;ali&#39;: 25, &#39;rahbini&#39;: 814, &#39;kepuasan&#39;: 410, &#39;berbelanja&#39;: 85, &#39;tom&#39;: 992, &#39;jerry&#39;: 364, &#39;dibawah&#39;: 177, &#39;bimbingan&#39;: 112, &#39;pribanus&#39;: 782, &#39;wantara&#39;: 1032, &#39;nirma&#39;: 638, &#39;kurriwati&#39;: 473, &#39;terkumpul&#39;: 975, &#39;alat&#39;: 24, &#39;bantu&#39;: 65, &#39;software&#39;: 909, &#39;pengujian&#39;: 719, &#39;hipotesis&#39;: 312, &#39;diperoleh&#39;: 195, &#39;kehandalan&#39;: 396, &#39;daya&#39;: 153, &#39;tanggap&#39;: 956, &#39;jaminan&#39;: 355, &#39;empati&#39;: 240, &#39;bukti&#39;: 122, &#39;fisik&#39;: 269, &#39;dominan&#39;: 219, &#39;keandalan&#39;: 383, &#39;retailing&#39;: 845, &#39;mix&#39;: 610, &#39;merchandise&#39;: 595, &#39;atmosfer&#39;: 51, &#39;gerai&#39;: 288, &#39;retailimg&#39;: 844, &#39;idola&#39;: 319, &#39;mart&#39;: 524, &#39;kwanyar&#39;: 475, &#39;berlandaskan&#39;: 95, &#39;filsafat&#39;: 265, &#39;positivisme&#39;: 772, &#39;ditetapkan&#39;: 211, &#39;klasik&#39;: 434, &#39;memakai&#39;: 535, &#39;berdasarkan&#39;: 88, &#39;nilai&#39;: 637, &#39;adjusted&#39;: 7, &#39;square&#39;: 919, &#39;besarnya&#39;: 107, &#39;sisanya&#39;: 901, &#39;dipengaruhi&#39;: 193, &#39;diteliti&#39;: 207, &#39;current&#39;: 144, &#39;ratio&#39;: 821, &#39;return&#39;: 846, &#39;equity&#39;: 246, &#39;firm&#39;: 268, &#39;size&#39;: 904, &#39;leverage&#39;: 491, &#39;business&#39;: 126, &#39;risk&#39;: 852, &#39;kebijakan&#39;: 389, &#39;deviden&#39;: 167, &#39;manufaktur&#39;: 518, &#39;terdaftar&#39;: 969, &#39;bursa&#39;: 124, &#39;efek&#39;: 231, &#39;indonesia&#39;: 333, &#39;periode&#39;: 743, &#39;businees&#39;: 125, &#39;dividend&#39;: 215, &#39;payout&#39;: 674, &#39;efektivitas&#39;: 232, &#39;iklan&#39;: 322, &#39;consumer&#39;: 142, &#39;decision&#39;: 156, &#39;model&#39;: 613, &#39;cdm&#39;: 130, &#39;mahasiswa&#39;: 509, &#39;universitas&#39;: 1014, &#39;trunojoyo&#39;: 996, &#39;madura&#39;: 507, &#39;orang&#39;: 655, &#39;jalur&#39;: 354, &#39;path&#39;: 672, &#39;analysis&#39;: 33, &#39;pesan&#39;: 759, &#39;pengenalan&#39;: 713, &#39;merek&#39;: 596, &#39;keyakinan&#39;: 426, &#39;sikap&#39;: 895, &#39;niat&#39;: 636, &#39;nyata&#39;: 646, &#39;inovasi&#39;: 337, &#39;keunggulan&#39;: 424, &#39;bersaing&#39;: 102, &#39;kinerja&#39;: 430, &#39;diterapkannya&#39;: 209, &#39;optik&#39;: 653, &#39;reza&#39;: 848, &#39;lamongan&#39;: 480, &#39;kualitatif&#39;: 466, &#39;fenomenologi&#39;: 263, &#39;observasi&#39;: 648, &#39;penggunaan&#39;: 715, &#39;dokumen&#39;: 218, &#39;reduction&#39;: 826, &#39;display&#39;: 204, &#39;conclusion&#39;: 140, &#39;drawing&#39;: 223, &#39;verification&#39;: 1028, &#39;meningkatkan&#39;: 582, &#39;menerapkan&#39;: 559, &#39;volume&#39;: 1030, &#39;omzet&#39;: 650, &#39;meningkat&#39;: 581, &#39;terbukti&#39;: 968, &#39;mengalami&#39;: 562, &#39;ditawarkannya&#39;: 206, &#39;perbaikan&#39;: 732, &#39;pangsa&#39;: 667, &#39;pasarnya&#39;: 670, &#39;meluas&#39;: 534, &#39;daerah&#39;: 147, &#39;jawa&#39;: 361, &#39;timur&#39;: 985, &#39;mengidentifikasi&#39;: 571, &#39;ulang&#39;: 1010, &#39;nasabah&#39;: 630, &#39;bri&#39;: 120, &#39;layanan&#39;: 487, &#39;internet&#39;: 344, &#39;banking&#39;: 64, &#39;dimana&#39;: 188, &#39;kota&#39;: 458, &#39;diambil&#39;: 170, &#39;persepsi&#39;: 752, &#39;manfaat&#39;: 517, &#39;kemudahan&#39;: 405, &#39;keamanan&#39;: 382, &#39;ketersediaan&#39;: 421, &#39;fitur&#39;: 270, &#39;positif&#39;: 771, &#39;kecuali&#39;: 393, &#39;objek&#39;: 647, &#39;xl&#39;: 1037, &#39;meguji&#39;: 532, &#39;berdasar&#39;: 87, &#39;sistematis&#39;: 903, &#39;distribusi&#39;: 205, &#39;bangkalansecara&#39;: 61, &#39;strategi&#39;: 926, &#39;segi&#39;: 874, &#39;pln&#39;: 764, &#39;badan&#39;: 56, &#39;usaha&#39;: 1017, &#39;milik&#39;: 601, &#39;negara&#39;: 632, &#39;penyediaan&#39;: 727, &#39;listrik&#39;: 499, &#39;nasional&#39;: 631, &#39;mengelola&#39;: 565, &#39;bisnisnya&#39;: 115, &#39;praktek&#39;: 775, &#39;paktek&#39;: 664, &#39;terbaik&#39;: 966, &#39;mengoptimalisasikan&#39;: 575, &#39;sumbr&#39;: 937, &#39;manusia&#39;: 519, &#39;dimiliki&#39;: 190, &#39;proses&#39;: 794, &#39;pengembangan&#39;: 711, &#39;karir&#39;: 376, &#39;semangat&#39;: 881, &#39;kerja&#39;: 413, &#39;cabang&#39;: 127, &#39;bersifat&#39;: 103, &#39;respondenuji&#39;: 839, &#39;koefisien&#39;: 439, &#39;determinasi&#39;: 165, &#39;prestasi&#39;: 780, &#39;kesetiaan&#39;: 418, &#39;orgnisasional&#39;: 657, &#39;mentor&#39;: 588, &#39;sponsor&#39;: 917, &#39;kesempatan&#39;: 417, &#39;tumbuh&#39;: 1001, &#39;memiliki&#39;: 545, &#39;diatas&#39;: 174, &#39;kuat&#39;: 468, &#39;intention&#39;: 340, &#39;research&#39;: 834, &#39;know&#39;: 438, &#39;influence&#39;: 334, &#39;location&#39;: 500, &#39;effort&#39;: 234, &#39;service&#39;: 883, &#39;quality&#39;: 811, &#39;terhadap&#39;: 970, &#39;purchasing&#39;: 803, &#39;also&#39;: 27, &#39;variable&#39;: 1025, &#39;whichsuch&#39;: 1034, &#39;bigger&#39;: 111, &#39;ppengaruh&#39;: 774, &#39;home&#39;: 315, &#39;eat&#39;: 228, &#39;depot&#39;: 158, &#39;soto&#39;: 913, &#39;glorious&#39;: 292, &#39;asih&#39;: 44, &#39;use&#39;: 1018, &#39;quantitative&#39;: 812, &#39;method&#39;: 597, &#39;approach&#39;: 40, &#39;population&#39;: 768, &#39;entireall&#39;: 245, &#39;doingconducting&#39;: 217, &#39;used&#39;: 1019, &#39;accidental&#39;: 2, &#39;hence&#39;: 310, &#39;get&#39;: 289, &#39;responder&#39;: 841, &#39;collecting&#39;: 138, &#39;library&#39;: 492, &#39;result&#39;: 843, &#39;mention&#39;: 587, &#39;tied&#39;: 983, &#39;test&#39;: 982, &#39;prove&#39;: 795, &#39;free&#39;: 279, &#39;consisting&#39;: 141, &#39;together&#39;: 989, &#39;concluded&#39;: 139, &#39;keywords&#39;: 427, &#39;purchase&#39;: 802, &#39;kenaikan&#39;: 406, &#39;menyebabkan&#39;: 592, &#39;permintaan&#39;: 749, &#39;saham&#39;: 860, &#39;penurunan&#39;: 725, &#39;fluk&#39;: 272, &#39;tuatif&#39;: 998, &#39;menghindari&#39;: 570, &#39;kondisi&#39;: 448, &#39;menurunkan&#39;: 590, &#39;kisaran&#39;: 432, &#39;menarik&#39;: 553, &#39;investor&#39;: 348, &#39;membeli&#39;: 540, &#39;pemecahan&#39;: 689, &#39;stock&#39;: 925, &#39;split&#39;: 916, &#39;dasarnya&#39;: 151, &#39;permasalahan&#39;: 748, &#39;berbeda&#39;: 84, &#39;beda&#39;: 74, &#39;bei&#39;: 76, &#39;paired&#39;: 661, &#39;sample&#39;: 866, &#39;pengamatan&#39;: 706, &#39;penetuan&#39;: 704, &#39;perbedaan&#39;: 733, &#39;rata&#39;: 820, &#39;tva&#39;: 1005, &#39;perdagangan&#39;: 735, &#39;pergerakan&#39;: 737, &#39;bundling&#39;: 123, &#39;strategy&#39;: 927, &#39;restoran&#39;: 842, &#39;quick&#39;: 813, &#39;chicken&#39;: 133, &#39;raya&#39;: 822, &#39;dukuh&#39;: 226, &#39;kupang&#39;: 472, &#39;surabayadibimbing&#39;: 942, &#39;yustina&#39;: 1039, &#39;chrismardani&#39;: 134, &#39;focus&#39;: 274, &#39;form&#39;: 276, &#39;manakah&#39;: 516, &#39;makanan&#39;: 511, &#39;cepat&#39;: 132, &#39;saji&#39;: 861, &#39;surabaya&#39;: 941, &#39;bentuk&#39;: 80, &#39;paketan&#39;: 663, &#39;surabayametode&#39;: 943, &#39;mebagikan&#39;: 530, &#39;mengunakan&#39;: 578, &#39;perangkat&#39;: 730, &#39;menunjukan&#39;: 589, &#39;kebangkrutan&#39;: 384, &#39;minuman&#39;: 606, &#39;bangkrut&#39;: 62, &#39;altman&#39;: 29, &#39;memperoleh&#39;: 549, &#39;peringatan&#39;: 742, &#39;tanda&#39;: 954, &#39;diskriptif&#39;: 203, &#39;peneliti&#39;: 698, &#39;dijadikan&#39;: 185, &#39;menghasilkan&#39;: 569, &#39;score&#39;: 872, &#39;kritis&#39;: 464, &#39;sehat&#39;: 876, &#39;profesionalisme&#39;: 788, &#39;keterampilan&#39;: 420, &#39;aksesibilitas&#39;: 17, &#39;fleksibilitas&#39;: 271, &#39;kepercayaan&#39;: 409, &#39;reputasi&#39;: 833, &#39;kredibilitas&#39;: 461, &#39;recovery&#39;: 825, &#39;serviscape&#39;: 884, &#39;pasien&#39;: 671, &#39;rumah&#39;: 857, &#39;sakit&#39;: 862, &#39;terpadu&#39;: 976, &#39;servisecape&#39;: 885, &#39;penlitian&#39;: 723, &#39;konsep&#39;: 451, &#39;aida&#39;: 13, &#39;helm&#39;: 309, &#39;ink&#39;: 336, &#39;berusaha&#39;: 106, &#39;attention&#39;: 53, &#39;interest&#39;: 342, &#39;desire&#39;: 162, &#39;action&#39;: 4, &#39;deterjen&#39;: 164, &#39;rinso&#39;: 849, &#39;anti&#39;: 38, &#39;noda&#39;: 639, &#39;berdomisili&#39;: 89, &#39;desa&#39;: 159, &#39;telang&#39;: 960, &#39;menganalisis&#39;: 564, &#39;atribut&#39;: 52, &#39;kepentingan&#39;: 408, &#39;pengguna&#39;: 714, &#39;sepeda&#39;: 882, &#39;motor&#39;: 619, &#39;jembatan&#39;: 362, &#39;suramadu&#39;: 944, &#39;diagram&#39;: 169, &#39;kartesius&#39;: 377, &#39;importance&#39;: 323, &#39;performance&#39;: 736, &#39;enam&#39;: 242, &#39;fokus&#39;: 275, &#39;utama&#39;: 1021, &#39;ketidak&#39;: 422, &#39;puasan&#39;: 799, &#39;lampu&#39;: 481, &#39;penerangan&#39;: 701, &#39;terpasang&#39;: 977, &#39;menyala&#39;: 591, &#39;malam&#39;: 514, &#39;petugas&#39;: 761, &#39;jasa&#39;: 359, &#39;marga&#39;: 522, &#39;berpenampilan&#39;: 98, &#39;rapi&#39;: 817, &#39;jalan&#39;: 353, &#39;mulus&#39;: 624, &#39;berlubang&#39;: 96, &#39;tiket&#39;: 984, &#39;teliti&#39;: 962, &#39;uang&#39;: 1006, &#39;kembalian&#39;: 403, &#39;pt&#39;: 797, &#39;asuransi&#39;: 50, &#39;kecelakaan&#39;: 392, &#39;patroli&#39;: 673, &#39;sungguh&#39;: 939, &#39;mogok&#39;: 616, &#39;ban&#39;: 58, &#39;bocor&#39;: 118, &#39;dll&#39;: 216, &#39;ulfiyatun&#39;: 1011, &#39;mutohharoh&#39;: 627, &#39;faktor&#39;: 258, &#39;menentukan&#39;: 557, &#39;preferensi&#39;: 778, &#39;belanja&#39;: 77, &#39;online&#39;: 651, &#39;fashion&#39;: 261, &#39;mahasiwa&#39;: 510, &#39;fakultas&#39;: 259, &#39;ekonomi&#39;: 236, &#39;journal&#39;: 366, &#39;economics&#39;: 230, &#39;program&#39;: 790, &#39;manajemen&#39;: 515, &#39;drs&#39;: 224, &#39;mohamad&#39;: 617, &#39;tambrin&#39;: 952, &#39;mm&#39;: 611, &#39;crismardani&#39;: 143, &#39;ssi&#39;: 920, &#39;sistem&#39;: 902, &#39;informasi&#39;: 335, &#39;global&#39;: 291, &#39;berbasis&#39;: 83, &#39;komputer&#39;: 444, &#39;perlahan&#39;: 746, &#39;lahan&#39;: 477, &#39;menggeser&#39;: 568, &#39;budaya&#39;: 121, &#39;konvensional&#39;: 453, &#39;praktis&#39;: 776, &#39;modern&#39;: 614, &#39;dirilis&#39;: 198, &#39;detikcom&#39;: 166, &#39;dibeli&#39;: 178, &#39;dipertimbangkan&#39;: 196, &#39;menetukan&#39;: 560, &#39;berketergantungan&#39;: 93, &#39;interdependent&#39;: 341, &#39;jenis&#39;: 363, &#39;statistic&#39;: 922, &#39;konfirmatori&#39;: 449, &#39;didapatkan&#39;: 182, &#39;kmo&#39;: 437, &#39;item&#39;: 351, &#39;rendah&#39;: 831, &#39;klasifikasi&#39;: 433, &#39;miserable&#39;: 609, &#39;statistik&#39;: 924, &#39;ukuran&#39;: 1009, &#39;kecukuperatan&#39;: 394, &#39;hubungan&#39;: 317, &#39;layak&#39;: 486, &#39;kesimpulan&#39;: 419, &#39;alternatif&#39;: 28, &#39;liquid&#39;: 498, &#39;penarikan&#39;: 691, &#39;purpossive&#39;: 807, &#39;dianalisis&#39;: 172, &#39;statistical&#39;: 923, &#39;solution&#39;: 910, &#39;duga&#39;: 225, &#39;rasio&#39;: 818, &#39;likuiditas&#39;: 494, &#39;struktur&#39;: 931, &#39;modal&#39;: 612, &#39;debt&#39;: 155, &#39;roe&#39;: 854, &#39;lq&#39;: 504, &#39;relationship&#39;: 829, &#39;marketing&#39;: 523, &#39;keuntungan&#39;: 425, &#39;komitmen&#39;: 441, &#39;komunikasi&#39;: 446, &#39;kebenaran&#39;: 385, &#39;loyalitas&#39;: 502, &#39;adira&#39;: 6, &#39;finance&#39;: 266, &#39;wilayah&#39;: 1035, &#39;barat&#39;: 69, &#39;negatif&#39;: 633, &#39;diana&#39;: 171, &#39;agustini&#39;: 12, &#39;dewi&#39;: 168, &#39;keuangan&#39;: 423, &#39;akuisisi&#39;: 23, &#39;melakuukan&#39;: 533, &#39;jurusan&#39;: 369, &#39;dipilih&#39;: 197, &#39;didasarkan&#39;: 183, &#39;kriteria&#39;: 462, &#39;tersedia&#39;: 979, &#39;laporan&#39;: 485, &#39;aktivitas&#39;: 22, &#39;pengakuisisi&#39;: 705, &#39;pengambil&#39;: 707, &#39;alih&#39;: 26, &#39;asset&#39;: 46, &#39;mengakuisisi&#39;: 561, &#39;anak&#39;: 31, &#39;diukur&#39;: 213, &#39;total&#39;: 994, &#39;turnover&#39;: 1004, &#39;investmen&#39;: 347, &#39;earning&#39;: 227, &#39;sharekelima&#39;: 887, &#39;dianalisisi&#39;: 173, &#39;samples&#39;: 867, &#39;self&#39;: 878, &#39;efficacy&#39;: 233, &#39;magnitude&#39;: 508, &#39;generality&#39;: 287, &#39;strength&#39;: 928, &#39;akademik&#39;: 15, &#39;berprestasi&#39;: 100, &#39;mengikuti&#39;: 572, &#39;mawapres&#39;: 529, &#39;diterima&#39;: 210, &#39;temuan&#39;: 963, &#39;teridiri&#39;: 972, &#39;r²&#39;: 859, &#39;muhammad&#39;: 622, &#39;sholeh&#39;: 888, &#39;televisi&#39;: 961, &#39;kartu&#39;: 378, &#39;seluler&#39;: 879, &#39;geger&#39;: 286, &#39;bambang&#39;: 57, &#39;setiyo&#39;: 886, &#39;pambudi&#39;: 665, &#39;suyono&#39;: 948, &#39;msm&#39;: 621, &#39;isi&#39;: 350, &#39;format&#39;: 277, &#39;sumber&#39;: 936, &#39;kompensasi&#39;: 442, &#39;finansial&#39;: 267, &#39;nonfinansial&#39;: 641, &#39;fhitung&#39;: 264, &#39;pos&#39;: 770, &#39;persero&#39;: 753, &#39;kantor&#39;: 374, &#39;meneliti&#39;: 556, &#39;pendidikan&#39;: 695, &#39;pelatihan&#39;: 682, &#39;rangka&#39;: 816, &#39;produktivitas&#39;: 786, &#39;meniliti&#39;: 580, &#39;perubahan&#39;: 756, &#39;disebabkan&#39;: 200, &#39;masuk&#39;: 527, &#39;kebenarannya&#39;: 386, &#39;beta&#39;: 108, &#39;abtrak&#39;: 1, &#39;uswatun&#39;: 1020, &#39;khasanah&#39;: 428, &#39;etos&#39;: 250, &#39;presatasi&#39;: 779, &#39;ptpln&#39;: 798, &#39;diatribusi&#39;: 175, &#39;area&#39;: 41, &#39;mojokerto&#39;: 618, &#39;dibagikan&#39;: 176, &#39;semanagt&#39;: 880, &#39;disiplin&#39;: 202, &#39;munculnya&#39;: 626, &#39;lahirnya&#39;: 478, &#39;mengemis&#39;: 566, &#39;memilih&#39;: 543, &#39;profesi&#39;: 787, &#39;pengemis&#39;: 712, &#39;lingkungan&#39;: 495, &#39;keluarga&#39;: 400, &#39;periaku&#39;: 739, &#39;kebiasaan&#39;: 388, &#39;kehidupan&#39;: 397, &#39;sehari&#39;: 875, &#39;hari&#39;: 304, &#39;kamal&#39;: 372, &#39;kab&#39;: 370, &#39;memprihatinkan&#39;: 550, &#39;indikator&#39;: 329, &#39;etnografis&#39;: 249, &#39;sosialisasi&#39;: 912, &#39;peran&#39;: 728, &#39;berprofesi&#39;: 101, &#39;modus&#39;: 615, &#39;operandi&#39;: 652, &#39;jaringan&#39;: 358, &#39;indicator&#39;: 327, &#39;behavioral&#39;: 75, &#39;sociology&#39;: 908, &#39;menerangkan&#39;: 558, &#39;tingkah&#39;: 986, &#39;laku&#39;: 479, &#39;akibatnya&#39;: 16, &#39;teory&#39;: 965, &#39;exchange&#39;: 254, &#39;social&#39;: 907, &#39;kekecewaan&#39;: 398, &#39;bersumber&#39;: 104, &#39;adnya&#39;: 8, &#39;dorongan&#39;: 220, &#39;sosial&#39;: 911, &#39;stres&#39;: 929, &#39;terhdap&#39;: 971, &#39;dosen&#39;: 221, &#39;stressor&#39;: 930, &#39;individu&#39;: 330, &#39;kelompok&#39;: 399, &#39;organisasi&#39;: 656, &#39;katakunci&#39;: 380, &#39;investasi&#39;: 346, &#39;berhubungan&#39;: 92, &#39;rasional&#39;: 819, &#39;menginvestasikan&#39;: 573, &#39;dananya&#39;: 149, &#39;efisien&#39;: 235, &#39;minimal&#39;: 605, &#39;aktif&#39;: 19, &#39;frekuensi&#39;: 280, &#39;membagi&#39;: 537, &#39;dividen&#39;: 214, &#39;membentuk&#39;: 541, &#39;portofolio&#39;: 769, &#39;optimal&#39;: 654, &#39;kandidat&#39;: 373, &#39;non&#39;: 640, &#39;cut&#39;: 145, &#39;off&#39;: 649, &#39;point&#39;: 765, &#39;dibentuk&#39;: 179, &#39;excess&#39;: 253, &#39;returns&#39;: 847, &#39;erb&#39;: 248, &#39;ci&#39;: 135, &#39;perhitungan&#39;: 738, &#39;komposisi&#39;: 443, &#39;proporsi&#39;: 792, &#39;dana&#39;: 148, &#39;adaro&#39;: 5, &#39;energy&#39;: 244, &#39;tbk&#39;: 957, &#39;gudang&#39;: 298, &#39;garam&#39;: 284, &#39;hm&#39;: 314, &#39;sampoerna&#39;: 869, &#39;astra&#39;: 48, &#39;otopart&#39;: 659, &#39;multi&#39;: 623, &#39;bintang&#39;: 113, &#39;agro&#39;: 10, &#39;lestari&#39;: 490, &#39;goodyear&#39;: 294, &#39;indika&#39;: 328, &#39;united&#39;: 1013, &#39;tractors&#39;: 995, &#39;pabrik&#39;: 660, &#39;kertas&#39;: 414, &#39;tjiwi&#39;: 988, &#39;kimia&#39;: 429, &#39;indofood&#39;: 331, &#39;sukses&#39;: 934, &#39;makmur&#39;: 512, &#39;international&#39;: 343, &#39;bank&#39;: 63, &#39;indeks&#39;: 325, &#39;tunggal&#39;: 1003, &#39;benar&#39;: 79, &#39;aktiva&#39;: 21, &#39;expected&#39;: 255, &#39;rekrutmen&#39;: 828, &#39;pusat&#39;: 809, &#39;gresik&#39;: 297, &#39;cipta&#39;: 136, &#39;sejahtera&#39;: 877, &#39;hening&#39;: 311, &#39;ary&#39;: 43, &#39;putra&#39;: 810, &#39;media&#39;: 531, &#39;facebook&#39;: 257, &#39;pakaian&#39;: 662, &#39;pemimbing&#39;: 690, &#39;se&#39;: 873, &#39;klik&#39;: 436, &#39;menyebarkan&#39;: 593, &#39;vairabel&#39;: 1022, &#39;habibah&#39;: 299, &#39;ekuitas&#39;: 237, &#39;notebook&#39;: 642, &#39;acer&#39;: 3, &#39;dibuktikan&#39;: 181, &#39;penguasaan&#39;: 718, &#39;hamper&#39;: 301, &#39;pasar&#39;: 669, &#39;dasar&#39;: 150, &#39;kenyataan&#39;: 407, &#39;penelitiannya&#39;: 700, &#39;dilaksanakan&#39;: 186, &#39;penelitan&#39;: 697, &#39;bebasnya&#39;: 73, &#39;kesadaran&#39;: 415, &#39;asosiasi&#39;: 45, &#39;terikatnya&#39;: 974, &#39;instrument&#39;: 339, &#39;realibilitas&#39;: 824, &#39;pandangan&#39;: 666, &#39;gambaran&#39;: 282, &#39;dealer&#39;: 154, &#39;surya&#39;: 946, &#39;agung&#39;: 11, &#39;resmi&#39;: 835, &#39;honda&#39;: 316, &#39;kotler&#39;: 459, &#39;armstrong&#39;: 42, &#39;gaya&#39;: 285, &#39;desain&#39;: 160, &#39;memutuskan&#39;: 552, &#39;supra&#39;: 940, &#39;mempunyah&#39;: 551, &#39;emosional&#39;: 239, &#39;pelanggan&#39;: 680, &#39;variebel&#39;: 1027, &#39;memilik&#39;: 544, &#39;terbesar&#39;: 967, &#39;yamaha&#39;: 1038, &#39;new&#39;: 635, &#39;jupiter&#39;: 368, &#39;liniear&#39;: 496, &#39;hasilnya&#39;: 306, &#39;diolah&#39;: 192, &#39;aplikasi&#39;: 39, &#39;kusniyah&#39;: 474, &#39;go&#39;: 293, &#39;public&#39;: 800, &#39;hj&#39;: 313, &#39;evaliati&#39;: 251, &#39;amaniyah&#39;: 30, &#39;prasetyo&#39;: 777, &#39;nugroho&#39;: 644, &#39;spi&#39;: 915, &#39;statis&#39;: 921, &#39;fluktuatif&#39;: 273, &#39;diharapkan&#39;: 184, &#39;empiris&#39;: 241, &#39;aktifitas&#39;: 20, &#39;muzanni&#39;: 628, &#39;peranan&#39;: 729, &#39;piutang&#39;: 763, &#39;tertahadap&#39;: 980, &#39;rentabilitas&#39;: 832, &#39;koperasi&#39;: 454, &#39;syariah&#39;: 951, &#39;bmt&#39;: 117, &#39;ugt&#39;: 1007, &#39;sidogiri&#39;: 891, &#39;pembantu&#39;: 686, &#39;kpri&#39;: 460, &#39;kopergu&#39;: 455, &#39;purnamawati&#39;: 804, &#39;msi&#39;: 620, &#39;lembaga&#39;: 488, &#39;pendapatan&#39;: 693, &#39;pinjaman&#39;: 762, &#39;pendanaan&#39;: 692, &#39;anggota&#39;: 35, &#39;otomatis&#39;: 658, &#39;tertanam&#39;: 981, &#39;potensi&#39;: 773, &#39;penerapan&#39;: 702, &#39;pengelolaan&#39;: 710, &#39;diterapkan&#39;: 208, &#39;kriterian&#39;: 463, &#39;pertumbuhan&#39;: 755, &#39;perputaran&#39;: 751, &#39;kategori&#39;: 381, &#39;perkembangan&#39;: 745, &#39;ike&#39;: 321, &#39;miranti&#39;: 608, &#39;maan&#39;: 506, &#39;ghodaqo&#39;: 290, &#39;siddiq&#39;: 889, &#39;jombang&#39;: 365, &#39;dibimbing&#39;: 180, &#39;sp&#39;: 914, &#39;periklanan&#39;: 740, &#39;publisitas&#39;: 801, &#39;personal&#39;: 754, &#39;menitikberatkan&#39;: 584, &#39;air&#39;: 14, &#39;mineral&#39;: 603, &#39;kemasan&#39;: 402, &#39;purprosive&#39;: 808, &#39;maret&#39;: 521, &#39;reabilitas&#39;: 823, &#39;teknis&#39;: 959, &#39;memakaiuji&#39;: 536, &#39;anissa&#39;: 37, &#39;novianti&#39;: 643, &#39;minyak&#39;: 607, &#39;goreng&#39;: 295, &#39;sania&#39;: 870, &#39;ibu&#39;: 318, &#39;perumahan&#39;: 757, &#39;graha&#39;: 296, &#39;permai&#39;: 747, &#39;dr&#39;: 222, &#39;nurita&#39;: 645, &#39;andriani&#39;: 34, &#39;ir&#39;: 349, &#39;hadi&#39;: 300, &#39;purnomo&#39;: 805, &#39;label&#39;: 476, &#39;simple&#39;: 897, &#39;random&#39;: 815, &#39;martabak&#39;: 525, &#39;hawaii&#39;: 307, &#39;elemen&#39;: 238, &#39;brand&#39;: 119, &#39;awareness&#39;: 55, &#39;assocations&#39;: 47, &#39;kesan&#39;: 416, &#39;perceived&#39;: 734, &#39;loyalty&#39;: 503, &#39;handphone&#39;: 302, &#39;blackberry&#39;: 116, &#39;diperhatikan&#39;: 194, &#39;kopontren&#39;: 456, &#39;tanah&#39;: 953, &#39;merah&#39;: 594, &#39;menjalani&#39;: 585, &#39;pekerjaan&#39;: 677, &#39;mencampur&#39;: 554, &#39;adukkan&#39;: 9, &#39;dirumah&#39;: 199, &#39;tangga&#39;: 955, &#39;membawa&#39;: 539, &#39;kedalam&#39;: 395, &#39;sulit&#39;: 935, &#39;penuh&#39;: 724, &#39;beban&#39;: 71, &#39;berat&#39;: 82, &#39;berdampak&#39;: 86, &#39;pekerjaannya&#39;: 678, &#39;tugas&#39;: 999, &#39;maksimal&#39;: 513, &#39;dilakukannya&#39;: 187, &#39;jangka&#39;: 357, &#39;lembur&#39;: 489, &#39;konflik&#39;: 450, &#39;ganda&#39;: 283, &#39;perawat&#39;: 731, &#39;wanita&#39;: 1031, &#39;rs&#39;: 856, &#39;syamrabu&#39;: 950, &#39;kinerjanya&#39;: 431, &#39;unsur&#39;: 1015, &#39;pengirim&#39;: 716, &#39;komunikator&#39;: 447, &#39;penerima&#39;: 703, &#39;komunikan&#39;: 445, &#39;umpan&#39;: 1012, &#39;produktifitas&#39;: 785, &#39;pegawai&#39;: 675, &#39;negeri&#39;: 634, &#39;sipil&#39;: 900, &#39;dinas&#39;: 191, &#39;pendidikian&#39;: 696, &#39;proporsional&#39;: 793, &#39;ftabel&#39;: 281, &#39;signifikansi&#39;: 894, &#39;dimasukkan&#39;: 189, &#39;varibel&#39;: 1026, &#39;kominkator&#39;: 440, &#39;sigifikan&#39;: 892, &#39;upaya&#39;: 1016, &#39;rokok&#39;: 855, &#39;mild&#39;: 600, &#39;socah&#39;: 906, &#39;penyedap&#39;: 726, &#39;masako&#39;: 526, &#39;populasinya&#39;: 767, &#39;robatal&#39;: 853, &#39;sampang&#39;: 864, &#39;mengkonsumsi&#39;: 574, &#39;pelabelan&#39;: 679, &#39;pelengkap&#39;: 684, &#39;independen&#39;: 326, &#39;dependen&#39;: 157, &#39;simpulan&#39;: 898, &#39;kebudayaan&#39;: 390, &#39;pribadi&#39;: 781, &#39;psikologis&#39;: 796, &#39;susu&#39;: 947, &#39;cair&#39;: 129, &#39;indomilk&#39;: 332, &#39;petis&#39;: 760, &#39;ikan&#39;: 320, &#39;tuna&#39;: 1002, &#39;hdiya&#39;: 308, &#39;banyuanyar&#39;: 67, &#39;kosumen&#39;: 457, &#39;ditribusi&#39;: 212, &#39;jamu&#39;: 356, &#39;tolak&#39;: 991, &#39;angin&#39;: 36, &#39;sido&#39;: 890, &#39;muncul&#39;: 625, &#39;manyar&#39;: 520}
+</pre></div>
+</div>
+</div>
+</div>
+<p>diatas ini merupakan daftar kata didalam corpus yang berjumlah 339 data kata</p>
+<blockquote>
+<div><p>Pemrosesan TF-IDF</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span><span class="n">smooth_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vect_abstrak</span><span class="o">=</span><span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">bag</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vect_abstrak</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (0, 1024)	0.020900295374455924
+  (0, 987)	0.10991580583903934
+  (0, 978)	0.14837195571811498
+  (0, 871)	0.14837195571811498
+  (0, 858)	0.07418597785905749
+  (0, 851)	0.2683578700111031
+  (0, 789)	0.3354473375138789
+  (0, 783)	0.1786491398999093
+  (0, 758)	0.13304767301837103
+  (0, 744)	0.07418597785905749
+  (0, 722)	0.05814892180151073
+  (0, 721)	0.13417893500555156
+  (0, 709)	0.04264410858027216
+  (0, 699)	0.0713949463098071
+  (0, 681)	0.3709298892952874
+  (0, 598)	0.03143965842604761
+  (0, 583)	0.07418597785905749
+  (0, 579)	0.07418597785905749
+  (0, 567)	0.07418597785905749
+  (0, 555)	0.06708946750277578
+  (0, 546)	0.07418597785905749
+  (0, 483)	0.05495790291951967
+  (0, 471)	0.02311872249372509
+  (0, 465)	0.26609534603674206
+  (0, 375)	0.14837195571811498
+  :	:
+  (49, 520)	0.21944521826598395
+  (49, 497)	0.016563143929987218
+  (49, 493)	0.02533641918581737
+  (49, 470)	0.021729906476264584
+  (49, 469)	0.03671190879642282
+  (49, 467)	0.019541924032929706
+  (49, 452)	0.10569032215992946
+  (49, 435)	0.03440138744523189
+  (49, 411)	0.029534773939648852
+  (49, 356)	0.21944521826598395
+  (49, 350)	0.15876275559746125
+  (49, 338)	0.02533641918581737
+  (49, 322)	0.1625677702129567
+  (49, 305)	0.011883101541675076
+  (49, 277)	0.11907206669809595
+  (49, 219)	0.040094235463367905
+  (49, 152)	0.030361008452201816
+  (49, 106)	0.03091741364353516
+  (49, 99)	0.02792185915042384
+  (49, 90)	0.01584876297785247
+  (49, 78)	0.19508132425554803
+  (49, 49)	0.023025897834626444
+  (49, 36)	0.21944521826598395
+  (49, 32)	0.026802190054823306
+  (49, 0)	0.019541924032929706
+</pre></div>
+</div>
+</div>
+</div>
+<p>Diatas ini merupakan daftar TF-IDF didalam setiap dokumen yang nilainya bukan 0 (terdapat kata yang muncul)<br>
+Contohnya pada dokumen index ke 9 dengan kata yang berada di index ke 4, muncul beberapa kata sehingga muncul hasil perhitungan TF-IDF-nya</p>
+<blockquote>
+<div><p>Menampilkan data hasil pemrosesan TD-IDF kedalam bentuk DataFrame agar lebih mudah dibaca</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">term</span><span class="o">=</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">term</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;abstrak&#39;, &#39;abtrak&#39;, &#39;accidental&#39;, ..., &#39;xl&#39;, &#39;yamaha&#39;, &#39;yustina&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>variabel “term” berisi daftar list kata didalam corpus</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Tf_Idf</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">vect_abstrak</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">term</span><span class="p">])</span>
+<span class="n">df_Tf_Idf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>abstrak</th>
+      <th>abtrak</th>
+      <th>accidental</th>
+      <th>acer</th>
+      <th>action</th>
+      <th>adaro</th>
+      <th>adira</th>
+      <th>adjusted</th>
+      <th>adnya</th>
+      <th>adukkan</th>
+      <th>...</th>
+      <th>volume</th>
+      <th>wanita</th>
+      <th>wantara</th>
+      <th>wawancara</th>
+      <th>whichsuch</th>
+      <th>wilayah</th>
+      <th>windows</th>
+      <th>xl</th>
+      <th>yamaha</th>
+      <th>yustina</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.033032</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.041236</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.072762</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.066789</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.054676</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 1040 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Tf_Idf</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(50, 1040)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dari hasil diatas dapat diketahui kata-kata yang tidak muncul didalam setiap dokumen memiliki nilai TF-IDF nol (0) sedangkan kata-kata yang muncul memiliki nilainya masing-masing</p>
+</section>
+</section>
+<section id="penerapan-lsa-latent-semantic-analysis">
+<h2>2. Penerapan LSA (Latent Semantic Analysis)<a class="headerlink" href="#penerapan-lsa-latent-semantic-analysis" title="Permalink to this headline">#</a></h2>
+<p>LSA dapat digunakan untuk mengekstrak topik yang tidak secara tersurat dapat dibaca dari sebuah kumpulan dokumen.<br></p>
+<p>A = σ Σ U<br></p>
+<p>Komputasi dasar yang ada di dalam LSA adalah perhitungan dua matriks yang berisi vektor eigen, umumnya dinotasikan sebagai σ dan U, serta satu matriks diagonal, umumnya dinotasikan sebagai Σ, yang kesemuanya mengkonstruksi sebuah matriks A, yaitu korpus atau kumpulan dokumen.</p>
+<blockquote>
+<div><p>import library</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Pemrosesan LSA</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lsa_model</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;randomized&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">lsa_top</span><span class="o">=</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">vect_abstrak</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>code diatas menggunakan n_components sebanyak 5, artinya kita akan meranking term yang frecuencynya sering muncul sebanyak 5 peringkat. dengan menggunakan algoritma random dan iteriasi sebanyak 10x</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lsa_top</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lsa_top</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (no_of_doc*no_of_topics)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.82051614e-01  1.35212907e-01 -8.87902243e-02  9.22528033e-02
+  -9.59327440e-02  1.92646321e-01  2.49205558e-01  7.89853686e-02
+  -1.06584313e-01 -1.18913412e-02  5.98988723e-02 -1.73157016e-01
+   2.82038454e-02  1.32559574e-01  3.33363062e-01]
+ [ 5.00454024e-01 -8.16796733e-02 -1.59096118e-01 -1.91433354e-01
+  -9.91273688e-03  3.01369601e-02 -7.40744186e-02 -1.46942736e-01
+   1.10668457e-01  3.71743527e-01 -4.05945877e-02  4.16500555e-02
+  -6.28612658e-02 -3.84902558e-04 -8.50413150e-02]
+ [ 2.90048189e-01  1.74623418e-02  7.45203080e-02 -5.34342560e-02
+   5.31093209e-02  8.37282160e-02  1.71448664e-01 -4.13308600e-03
+  -1.80829533e-01 -1.38508094e-01  3.26248936e-02  2.72460500e-01
+  -2.14765028e-01  2.68669599e-02 -3.19041710e-02]
+ [ 2.60549523e-01  1.09157150e-02 -3.62273486e-02  2.41847776e-02
+  -9.67116421e-02 -8.90777853e-02  2.41100050e-01 -1.66821980e-01
+   2.69348857e-01  5.14119373e-01 -3.20675376e-02 -3.09649112e-02
+   9.50565589e-03 -3.35119309e-02 -7.33145734e-02]
+ [ 5.06158676e-01 -5.02801895e-02 -9.16221450e-02 -1.39688662e-01
+  -1.96169661e-02  4.66350488e-02 -6.44708179e-02 -1.23975117e-01
+   3.45556140e-01 -3.44203920e-02 -9.50919806e-02 -1.06296463e-01
+  -3.11333911e-02  2.07248296e-02 -6.75029267e-02]
+ [ 2.02030604e-01  3.62656045e-01 -3.08318247e-02  1.56990410e-01
+  -1.21792135e-02  4.30332305e-01 -1.03347905e-01 -1.02611661e-01
+   1.14522272e-01 -1.49694264e-01 -1.37374368e-01 -5.96012870e-02
+   2.17122684e-01 -3.51600059e-01 -7.65215313e-02]
+ [ 2.42158853e-01  1.00689831e-01  3.10714494e-01  1.48520880e-01
+   2.29316283e-01 -5.06548767e-02  1.12489236e-03  1.93422131e-01
+   1.63220249e-01  1.07284523e-01  3.78108817e-01 -1.37000299e-01
+   8.51584056e-02  3.95235160e-02  2.63965558e-02]
+ [ 8.39848111e-02  1.03906977e-01  2.63175630e-02 -5.80347945e-02
+  -4.77090390e-02  5.22679108e-02 -1.38091973e-02  1.83498755e-02
+  -1.24250477e-01  6.17397067e-02  1.51314543e-01  1.80446837e-02
+  -4.76498468e-02  4.43769155e-01  1.62862050e-01]
+ [ 1.86109891e-01  3.43081393e-02  6.65385100e-02  1.88407943e-01
+  -3.57652673e-02 -7.17023000e-02  1.24412983e-01 -6.45390374e-02
+  -6.08544869e-02 -2.50177621e-01 -5.26229317e-02  9.95643783e-02
+  -3.46856845e-01  8.86106466e-02 -3.87303185e-01]
+ [ 6.03748714e-01 -1.40079053e-01 -9.19486291e-02 -3.86228896e-01
+   9.26999664e-02  1.61336069e-01 -5.22501430e-02  1.22996945e-01
+  -1.01760616e-01 -3.19680828e-02  1.34080952e-02 -4.56103599e-02
+  -1.44725476e-02  6.66397478e-02 -8.63528604e-02]
+ [ 2.02502679e-01  1.96738279e-01  4.81405150e-01 -2.03599744e-01
+  -3.77519805e-01 -8.03640857e-02 -1.21075643e-01 -6.36056639e-02
+  -1.76290300e-01  1.20566592e-01 -1.39156092e-01  1.61239652e-02
+   2.68975993e-02 -9.36084156e-02  4.48348292e-02]
+ [ 2.03392514e-02  1.58637098e-02  2.05942269e-02  3.99316979e-02
+   5.00467311e-03  5.99502982e-03  1.96959322e-02  1.44848615e-03
+   7.19215428e-02 -1.02807727e-04  4.83561221e-02  2.07878751e-02
+   1.96123257e-01  2.76684025e-01  5.02700303e-01]
+ [ 1.51976682e-01  5.93345421e-01 -3.66544368e-01 -2.22984518e-01
+   1.23706939e-01 -4.98979600e-01  5.37669213e-02  4.91176521e-03
+   1.06711849e-02 -5.36350178e-02 -2.30896446e-02  9.20719002e-03
+   1.86175827e-02 -1.95869864e-02 -8.50089972e-03]
+ [ 2.13439505e-01 -1.78493812e-02  3.76470580e-03 -1.72136259e-02
+   1.15955338e-02  3.89535598e-02 -1.68557421e-02 -5.40606007e-04
+  -1.02906044e-01 -4.68551293e-02  5.15917245e-02  3.10534077e-01
+  -1.81744384e-01 -1.01976036e-01  3.04967916e-01]
+ [ 9.19240736e-02  4.92730465e-01 -1.44807178e-01  1.40890831e-01
+   3.09649098e-02  3.19583863e-01 -7.94399682e-02  4.47428214e-02
+  -1.40746917e-01  1.68101362e-01 -2.44614382e-02  2.08256586e-02
+  -1.63118348e-01  3.00311445e-01 -2.94639044e-02]
+ [ 2.42852204e-01  9.83234808e-03  2.85819436e-02  1.33396795e-01
+  -1.27964221e-01 -4.14606632e-03  2.80652580e-01 -1.76837221e-01
+   3.77641115e-01 -6.47142088e-02 -8.59032126e-02  5.31422707e-02
+   9.72698485e-02  7.03338098e-02  2.27607167e-01]
+ [ 4.36888745e-01 -7.16530934e-02  4.88754673e-02  1.01005459e-02
+   1.85933013e-01 -7.12183293e-03 -1.11449045e-01 -1.45541575e-02
+   4.71585878e-02  6.09056966e-02  6.78089493e-02  1.37881095e-01
+   1.16346871e-01 -1.58692888e-01  2.95723891e-02]
+ [ 5.39349349e-01 -9.37361678e-02 -1.47655560e-01 -1.73778574e-02
+  -1.11263853e-01  4.63144716e-03  1.39583085e-01  8.68875222e-02
+   1.57491969e-01 -7.32012999e-02 -5.21768893e-02 -6.84147389e-02
+  -4.09029028e-02  4.42303400e-03  1.29470451e-01]
+ [ 1.07999564e-01  5.88316333e-03 -5.64858052e-02  1.16108454e-01
+  -1.88533940e-01 -1.56340165e-02  5.10495247e-01 -3.65856814e-02
+  -1.25267868e-01  1.08031106e-01  6.03357508e-02 -1.39216682e-01
+   1.75518387e-01 -1.03867513e-01 -4.60595162e-02]
+ [ 2.52173691e-01  3.34294207e-02  7.70275849e-02  2.27043885e-01
+  -9.63075714e-03 -1.01156082e-01  5.05716252e-02  6.38015898e-01
+   1.44998619e-01  9.13400710e-02 -9.27743223e-02  1.04977348e-01
+  -1.24336948e-01 -3.75566625e-02 -3.45107886e-02]
+ [ 1.87079706e-01  4.31360261e-01 -9.55720203e-03  1.88676343e-01
+  -8.18504651e-03  5.18843498e-01 -5.62779162e-02 -6.38433376e-02
+   2.87988935e-02 -6.04495624e-02 -9.55390645e-02 -5.48038917e-02
+   1.44604172e-01 -2.56391336e-01  1.08604709e-02]
+ [ 1.85815255e-01  5.49364373e-03  7.82601521e-02  5.20356345e-02
+  -1.42506269e-02 -4.93660722e-03  1.41014221e-03 -1.64583972e-01
+   2.09276069e-01 -3.29380677e-01 -1.66213786e-01 -1.50265601e-02
+  -2.80472721e-01  6.41517351e-02  2.16368198e-01]
+ [ 1.15398298e-01  5.24793229e-01 -8.86640312e-02  2.02549447e-01
+   1.52986928e-02  3.65902041e-01 -1.01501474e-01  1.05431723e-01
+  -6.10554464e-02  1.43430983e-01  2.35856304e-02  1.55256783e-02
+  -1.08912805e-01  2.04881965e-01 -9.22425413e-02]
+ [ 1.56567940e-01  6.39191319e-02  1.64123110e-01  1.26352669e-01
+  -8.53431668e-02 -8.94860255e-02 -5.63195370e-02  2.97301143e-01
+   1.92895427e-01 -5.15309456e-02 -1.11569711e-01 -7.98045728e-02
+  -9.90205262e-02  1.98041535e-02  9.22364093e-03]
+ [ 2.63764123e-01  3.17139350e-02  3.57005391e-01 -8.55771205e-02
+   6.35896828e-01  2.83995190e-02  1.85442138e-01 -8.14794228e-02
+  -8.50315618e-02  5.53206275e-02 -9.52533351e-03 -7.84618102e-02
+   8.06320184e-02  2.53413794e-04 -5.21177573e-02]
+ [ 1.32449579e-01  1.43776111e-01  2.63637232e-01 -2.01430971e-02
+  -1.32039097e-01  1.56720485e-02 -6.30006392e-03 -9.14233382e-03
+   1.30002728e-01 -2.88692252e-02  6.25215689e-01 -7.52391361e-02
+  -2.61334109e-02  2.49204769e-02 -7.96130767e-02]
+ [ 2.43804948e-01  1.51618489e-01  2.82927993e-01 -1.08552488e-01
+  -2.22288581e-01 -1.31706029e-02 -6.13140135e-03 -1.29891223e-01
+   9.99517939e-02 -1.53297890e-01  2.82262380e-01  7.93583340e-02
+  -9.60162941e-02 -7.55791771e-02 -4.07857431e-02]
+ [ 1.63984432e-01  1.72687762e-01  4.83170406e-01 -2.80733369e-01
+  -3.62237921e-01 -9.71248129e-02 -1.28303292e-01  2.02757113e-02
+  -1.87943142e-01  5.14415379e-02 -2.85949295e-01 -1.00498137e-01
+   5.47763603e-02  1.42122173e-02  6.49359313e-02]
+ [ 8.55659987e-02  3.61955815e-02  4.35366699e-02  7.02636159e-02
+  -5.41254968e-02 -5.11568950e-02  3.30755428e-02 -7.37431058e-03
+   1.31020597e-01 -4.77372725e-02 -9.00688903e-02  5.14844095e-01
+   3.84221422e-01  3.04066419e-01 -1.76550011e-01]
+ [ 1.16848498e-01  1.15554987e-01  3.32983523e-01 -1.81588646e-02
+  -1.83438069e-01 -1.27021800e-01 -2.70211743e-02  2.46526483e-01
+  -4.16907381e-02  1.46671604e-01 -3.49633435e-01 -4.72307612e-02
+   1.19506849e-01  4.70491029e-02 -3.17710759e-02]
+ [ 6.61115610e-02  3.17144980e-01 -1.02575433e-01 -1.39454918e-01
+  -3.52714155e-03 -2.93717480e-01  2.76416181e-02 -1.62723261e-02
+   1.25820739e-02 -2.03155744e-01  1.27572214e-01 -5.30579499e-02
+   1.09579130e-01 -2.32863932e-01  1.18774085e-01]
+ [ 1.55391459e-01  1.66127978e-01  3.34414890e-01 -1.24778289e-01
+  -2.46904314e-01 -3.03072819e-02 -3.81734344e-02 -5.87627028e-02
+  -2.05980479e-02  1.18574329e-02  3.63022393e-01 -2.84354510e-02
+   4.20190883e-02  4.75886211e-03 -1.11341699e-01]
+ [ 2.90308080e-01 -1.53344256e-02  1.21270297e-01  1.66858541e-01
+   2.07153248e-01 -9.36558554e-02 -6.20506730e-02  5.30482782e-01
+   1.73313988e-01  8.86487331e-02  3.65649655e-02  1.36348034e-01
+   1.87440575e-02 -1.95436054e-01  4.69401184e-02]
+ [ 4.60368109e-01 -5.94527677e-02  2.35748080e-02  5.31927609e-01
+  -3.61753640e-02 -2.56046135e-01 -2.19901779e-01 -1.51059524e-01
+  -6.67274416e-02 -1.60119603e-01 -3.31671908e-02 -1.90610421e-01
+  -8.20561283e-02  8.76387303e-02 -7.33400187e-02]
+ [ 4.00284889e-01 -1.24400822e-01 -1.50737338e-01  1.30300691e-02
+  -1.40394256e-01  5.77627808e-02  4.00183442e-01  1.54817436e-01
+  -3.63536637e-01 -3.40449496e-02  6.11789763e-02  3.20278001e-02
+   9.75065741e-02 -7.81459565e-02 -1.57326107e-02]
+ [ 3.79932489e-01 -1.40108030e-02 -5.63310233e-02  2.65799248e-01
+  -2.20648232e-01 -1.00880644e-01  4.54602750e-01 -7.32250402e-02
+  -9.50045388e-02  6.74991797e-02 -2.56757917e-02 -8.31899600e-02
+  -9.93492535e-02 -7.46820780e-03 -1.75483817e-01]
+ [ 1.15982226e-01  6.82849490e-01 -3.63652831e-01 -1.57004199e-01
+   1.38511730e-01 -4.15078343e-01  1.08217102e-02  9.86286937e-03
+  -4.92919351e-02 -3.56137355e-02 -1.99373288e-02  1.99280145e-02
+   1.65096563e-02  1.28470723e-02 -5.44096312e-03]
+ [ 8.16398673e-02  6.29101720e-02  2.70181687e-02  2.15511830e-02
+  -3.83238664e-02  2.77097380e-02 -1.24695022e-03 -9.64627148e-02
+  -4.79505145e-02  1.87374621e-01  6.95710677e-02  4.09061611e-01
+  -3.65339436e-01 -3.03589974e-01  2.28810168e-01]
+ [ 4.32298772e-01 -2.71322459e-02 -1.76987476e-02 -1.49407693e-01
+   3.16794427e-03  6.71222464e-02 -1.40923574e-01 -2.60224327e-02
+   1.35354722e-01 -1.88256571e-01  2.30290650e-02 -5.78323573e-02
+   2.60198679e-02 -9.87202435e-03  2.99018126e-04]
+ [ 3.20951953e-01 -1.13910074e-01 -6.69972242e-02  4.16034229e-02
+   3.68235469e-02  4.17881628e-04 -8.26002709e-02  6.07057822e-02
+  -3.63080531e-01 -1.35760725e-01  5.04999854e-02  1.47257752e-01
+   2.74214571e-01 -7.21276085e-02  2.97263836e-02]
+ [ 6.53460615e-01 -7.80259132e-02 -1.38998791e-01 -4.48767252e-02
+  -1.02943111e-01  4.34526486e-02  1.63049103e-01 -1.72157478e-02
+   1.05143581e-01 -5.36313884e-02 -3.87443463e-02 -2.36493455e-02
+  -1.43281202e-02 -1.36513522e-02  8.85690471e-02]
+ [ 4.68237507e-01 -9.51967376e-02  7.00655363e-03  4.78733302e-01
+   4.61769930e-03 -2.52461252e-01 -3.39684756e-01 -1.34599269e-01
+  -1.43223433e-01 -4.70314601e-02 -5.17961151e-03 -1.89317670e-01
+   3.12773471e-02  5.93746131e-02  6.14386582e-02]
+ [ 4.38421305e-01 -3.45998735e-02 -9.07392681e-02  1.33481222e-01
+   1.17725586e-02 -9.94587438e-02 -2.56459900e-01 -2.52316773e-01
+  -9.38779634e-02  3.88284374e-01  2.71833142e-02  1.17419333e-01
+  -8.54554329e-02 -8.06411855e-02  6.72691740e-02]
+ [ 1.65379530e-01  5.04470684e-02  8.71070764e-02  1.46103219e-02
+  -9.39331472e-02  1.95620849e-02  2.85849282e-02 -1.12043806e-01
+   2.22446536e-01 -1.87968007e-01 -2.73789870e-02  3.87869054e-01
+   2.05924502e-01  1.68688812e-01 -1.82034313e-01]
+ [ 2.08409513e-01  1.31222148e-01  4.58341413e-01 -8.58641157e-02
+   2.28821264e-01 -2.55724713e-02  1.77410533e-01 -1.18765402e-01
+  -7.24516789e-02 -8.09766518e-02 -2.29326089e-01 -1.33666721e-02
+  -1.13103192e-01  5.75431391e-02  8.79449840e-02]
+ [ 5.31902062e-01 -1.39288434e-01 -1.63496102e-01 -3.82350976e-01
+   3.61877694e-02  1.09213761e-01 -1.30296718e-01  8.10394995e-02
+   1.03153391e-01 -1.34706799e-02 -4.35710788e-02 -1.62575909e-01
+  -7.32025345e-02  8.88524513e-02 -7.46509971e-02]
+ [ 6.09908115e-01 -1.42943934e-01 -7.48638023e-02  6.90696693e-02
+  -1.66764758e-02 -7.38505552e-03 -9.34887994e-02  8.32749832e-02
+  -2.23541046e-01 -2.23388542e-01  4.47042656e-02  6.43878420e-02
+   8.21619827e-02 -4.49103066e-02  3.27017399e-02]
+ [ 4.64675225e-01 -1.26628056e-01 -6.48020254e-02  1.25513259e-01
+   5.58269742e-02 -8.55420632e-02 -1.71279886e-01 -1.69250885e-01
+  -9.62693941e-02  2.12175751e-01  2.11111856e-02  7.38532317e-02
+   2.11374773e-01  5.54234964e-02 -1.03561782e-03]
+ [ 5.14967567e-01 -1.35863432e-01 -1.32838967e-01 -3.32527232e-01
+   2.87184481e-02  1.43874746e-01 -5.02911945e-02  1.51279977e-01
+  -7.23244714e-02 -3.20710218e-02  3.20320367e-02 -6.56958451e-02
+  -4.38975906e-02  9.15653772e-02 -7.44922486e-02]
+ [ 1.93469099e-01  6.12512870e-02  3.63064163e-01  4.17334091e-03
+   6.24638325e-01 -8.80843235e-03  2.24942013e-01 -1.95978858e-01
+  -4.98927060e-02  1.80770331e-02 -8.80979969e-02 -3.53286104e-02
+  -7.06282085e-05  2.68423179e-02 -1.18565668e-02]]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(50, 15)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="o">=</span><span class="n">lsa_top</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Document 0 :&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot; : &quot;</span><span class="p">,</span><span class="n">topic</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document 0 :
+Topic  0  :  18.205161389209238
+Topic  1  :  13.521290682454335
+Topic  2  :  -8.879022430098992
+Topic  3  :  9.225280328939137
+Topic  4  :  -9.593274397722992
+Topic  5  :  19.26463211663837
+Topic  6  :  24.920555763991388
+Topic  7  :  7.898536859456187
+Topic  8  :  -10.658431341364423
+Topic  9  :  -1.1891341229444348
+Topic  10  :  5.989887225133525
+Topic  11  :  -17.315701591126523
+Topic  12  :  2.8203845380372057
+Topic  13  :  13.255957437039234
+Topic  14  :  33.33630620057811
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># (no_of_topics*no_of_words)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">components_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(15, 1040)
+[[ 0.04091055  0.00150155  0.0183335  ...  0.06173515  0.02013753
+   0.0033966 ]
+ [ 0.00994709  0.00386372 -0.00554809 ... -0.0224772  -0.00181451
+   0.00028991]
+ [ 0.02366427  0.01175637 -0.00265481 ...  0.03322511 -0.00793407
+   0.00158319]
+ ...
+ [ 0.02003037  0.00237089  0.00283779 ...  0.01542732 -0.02602934
+  -0.01085285]
+ [ 0.00888709  0.00074169 -0.00240645 ...  0.02477511 -0.00214048
+  -0.00515853]
+ [ 0.02899808  0.00308084  0.03537978 ... -0.04999849 -0.04803506
+   0.00973357]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># most important words for each topic</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="n">vocab_comp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
+    <span class="n">sorted_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vocab_comp</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sorted_words</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic 0: 
+variabel keputusan pembelian produk harga uji merek penelitian berpengaruh promosi kualitas konsumen bangkalan signifikan pengaruh distribusi simultan parsial analisis swalayan 
+
+Topic 1: 
+perusahaan saham split stock ratio return akuisisi penelitian terdaftar kerja perbedaan indonesia bursa efek current equity perdagangan karyawan manufaktur volume 
+
+Topic 2: 
+kerja pesan karyawan langsung pln iklan karir pengembangan pengaruh stressor prestasi semangat kompensasi komunikasi persero pendidikan kinerja faktor variabel gresik 
+
+Topic 3: 
+merek persepsi ekuitas kualitas perusahaan loyalitas ratio trunojoyo mahasiswa madura universitas online asosiasi kesadaran ekonomi faktor fakultas notebook blackberry brand 
+
+Topic 4: 
+pesan iklan isi konsumen xl kartu seluler televisi format sumber beli saham kecamatan struktur geger keputusan angin jamu manyar muncul 
+
+Topic 5: 
+ratio perusahaan current equity profitabilitas akuisisi terdaftar manufaktur debt roe produk promosi bursa efek firm leverage risk size distribusi businees 
+
+Topic 6: 
+motor kualitas sepeda pesan kepuasan produk pelayanan jembatan suramadu pelanggan pengguna bangkalan jupiter new yamaha honda kemudahan petugas biaya atribut 
+
+Topic 7: 
+online faktor produk trunojoyo mahasiswa madura universitas iklan pakaian fakultas fashion ekonomi stressor belanja preferensi pembelian klik akademik langsung menentukan 
+
+Topic 8: 
+harga pelayanan berdasarkan variabel online kepuasan promosi langsung berpengaruh terikat pasien konflik keluarga berbelanja mix pekerjaan sikap rumah lokasi atmosfer 
+
+Topic 9: 
+swalayan jerry tom harga berbelanja perusahaan eceran sidogiri kepuasan pelayanan kopontren merah tanah bauran konsumen indah cabang kerja bangkalan fisik 
+
+Topic 10: 
+kompensasi langsung finansial kinerja karyawan gresik rekrutmen pt nonfinansial kantor fhitung pendidikan cdm jalur iklan pos produktivitas cabang pelatihan alat 
+
+Topic 11: 
+budaya keluarga pengemis konflik pekerjaan bangkalan perilaku cabang piutang bundling koperasi rentabilitas sidogiri online kamal anak bmt kopergu kpri pembantu 
+
+Topic 12: 
+budaya pengemis keluarga perilaku ratio kamal ibu atribut konflik pekerjaan lingkungan equity current stressor research service iklan cair indomilk susu 
+
+Topic 13: 
+perusahaan bersaing inovasi keunggulan budaya pengemis lamongan keluarga kinerja optik reza research akuisisi pemasaran perilaku purchasing decision konflik bangkrut kritis 
+
+Topic 14: 
+research purchasing service decision bundling biaya location quality cacat pelaporan kualitas profitabilitas effort influence method risiko surabaya variable cabang komunikasi 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Python\lib\site-packages\sklearn\utils\deprecation.py:87: FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2. Please use get_feature_names_out instead.
+  warnings.warn(msg, category=FutureWarning)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="kmeans.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">K-Means Cluster</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

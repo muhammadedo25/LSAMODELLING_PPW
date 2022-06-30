@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "C:\Python\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Python\lib\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Python\lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Python\lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Python\lib\asyncio\base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "C:\Python\lib\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Python\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Python\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import scrapy
+import json
+
+class Pta(scrapy.Spider):
+    name = "pta"
+    file_json = open("link.json")
+    start_urls = json.loads(file_json.read())
+    urls = []
+
+    for i in range(len(start_urls)):
+        b = start_urls[i]['url'][0]
+        urls.append(b)
+    
+    def start_requests(self):
+        for url in self.urls:
+            yield scrapy.Request(url = url, callback = self.parse)
+        
+    def parse(self, response):
+        # print(response.url)
+
+        for jurnal in response.css('#content_journal > ul > li'):
+            yield {
+                'Judul':jurnal.css('div:nth-child(2) > a::text').get(),
+                'Penulis':jurnal.css('div:nth-child(2) > div:nth-child(2) > span::text').get()[10:],
+                'Dosbing_1':jurnal.css('div:nth-child(2) > div:nth-child(3) > span::text').get()[21:],
+                'Dosbing_2':jurnal.css('div:nth-child(2) > div:nth-child(4) > span::text').get()[22:],
+                'Abstrak_indo':jurnal.css('div:nth-child(4) > div:nth-child(2) > p::text').get(),
+            }
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Input [1;32mIn [2][0m, in [0;36m<cell line: 4>[1;34m()[0m
+[0;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mscrapy[39;00m
+[0;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mjson[39;00m
+[1;32m----> 4[0m [38;5;28;01mclass[39;00m [38;5;21;01mPta[39;00m(scrapy[38;5;241m.[39mSpider):
+[0;32m      5[0m     name [38;5;241m=[39m [38;5;124m"[39m[38;5;124mpta[39m[38;5;124m"[39m
+[0;32m      6[0m     file_json [38;5;241m=[39m [38;5;28mopen[39m([38;5;124m"[39m[38;5;124mlink.json[39m[38;5;124m"[39m)
+
+Input [1;32mIn [2][0m, in [0;36mPta[1;34m()[0m
+[0;32m      4[0m [38;5;28;01mclass[39;00m [38;5;21;01mPta[39;00m(scrapy[38;5;241m.[39mSpider):
+[0;32m      5[0m     name [38;5;241m=[39m [38;5;124m"[39m[38;5;124mpta[39m[38;5;124m"[39m
+[1;32m----> 6[0m     file_json [38;5;241m=[39m [38;5;28;43mopen[39;49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mlink.json[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[0;32m      7[0m     start_urls [38;5;241m=[39m json[38;5;241m.[39mloads(file_json[38;5;241m.[39mread())
+[0;32m      8[0m     urls [38;5;241m=[39m []
+
+[1;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'link.json'
+FileNotFoundError: [Errno 2] No such file or directory: 'link.json'
+
